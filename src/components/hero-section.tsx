@@ -5,6 +5,7 @@ import { DesktopNavbar } from "./navbar";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
+import Link from "next/link";
 
 export default function HeroSection() {
     const articleRef = useRef<HTMLDivElement>(null);
@@ -47,7 +48,9 @@ export default function HeroSection() {
                     Experience natural, lifelike audio and exceptional build
                     quality made for the passionate music enthusiast.
                 </p>
-                <Button type="primary">see product</Button>
+                <Link href="/products/headphones/mark-II">
+                    <Button type="primary">see product</Button>
+                </Link>
             </article>
             <HeroBackgorund />
         </section>
