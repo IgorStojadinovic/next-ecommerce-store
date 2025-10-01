@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "./button";
 import Image from "next/image";
 export default function SpeakerZX9() {
@@ -46,9 +47,11 @@ export default function SpeakerZX9() {
                     Upgrade to premium speakers that are phenomenally built to
                     deliver truly remarkable sound.
                 </p>
-                <Button type="dark" className="md:mt-4">
-                    see product
-                </Button>
+                <Link href="/products/speakers/zx9-speaker">
+                    <Button type="dark" className="md:mt-4">
+                        see product
+                    </Button>
+                </Link>
             </article>
         </section>
     );

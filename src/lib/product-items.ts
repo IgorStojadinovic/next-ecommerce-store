@@ -56,7 +56,7 @@ const SpeakerItems: ProductItem[] = [
             tablet: "/assets/shared/tablet/image-zx9-speaker.jpg",
             desktop: "/assets/shared/desktop/image-zx9-speaker.jpg",
         },
-        href: "/products/speakers/zx9-speaker",
+        href: "/products/speakers/zx9",
     },
 
     {
@@ -70,7 +70,7 @@ const SpeakerItems: ProductItem[] = [
             tablet: "/assets/shared/tablet/image-zx7-speaker.jpg",
             desktop: "/assets/shared/desktop/image-zx7-speaker.jpg",
         },
-        href: "/products/speakers/zx7-speaker",
+        href: "/products/speakers/zx7",
     },
 ];
 

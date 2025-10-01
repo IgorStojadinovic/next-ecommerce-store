@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "./button";
 
 export default function EarphonesYX1() {
@@ -20,7 +21,9 @@ export default function EarphonesYX1() {
             </picture>
             <article className="flex flex-col items-start justify-center gap-6 text-black bg-(--color-gray) rounded-lg w-full px-6 py-11 md:w-1/2 md:px-10 md:min-h-[320px] xl:px-24 xl:py-37 ">
                 <h4>YX1 Earphones</h4>
-                <Button type="ghost">see product</Button>
+                <Link href="/products/earphones/wireless-earphones-y1">
+                    <Button type="ghost">see product</Button>
+                </Link>
             </article>
         </section>
     );

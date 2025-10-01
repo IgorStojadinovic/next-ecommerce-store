@@ -19,13 +19,13 @@ export default function Footer() {
                         <Link href="/" className={currentPath === "/" ? "text-(--color-orange-primary)" : "hover:text-(--color-orange-primary)"}>home</Link>
                     </li>
                     <li>
-                        <Link href="/" className={currentPath === "/headphones" ? "text-(--color-orange-primary)" : "hover:text-(--color-orange-primary)"}>headphones</Link>
+                        <Link href="/products/headphones" className={currentPath === "/products/headphones" ? "text-(--color-orange-primary)" : "hover:text-(--color-orange-primary)"}>headphones</Link>
                     </li>
                     <li>
-                        <Link href="/" className={currentPath === "/speakers" ? "text-(--color-orange-primary)" : "hover:text-(--color-orange-primary)"}>speakers</Link>
+                        <Link href="/products/speakers" className={currentPath === "/products/speakers" ? "text-(--color-orange-primary)" : "hover:text-(--color-orange-primary)"}>speakers</Link>
                     </li>
                     <li>
-                        <Link href="/" className={currentPath === "/earphones" ? "text-(--color-orange-primary)" : "hover:text-(--color-orange-primary)"}>earphones</Link>
+                        <Link href="/products/earphones" className={currentPath === "/products/earphones" ? "text-(--color-orange-primary)" : "hover:text-(--color-orange-primary)"}>earphones</Link>
                     </li>
                 </ul>
             </div>

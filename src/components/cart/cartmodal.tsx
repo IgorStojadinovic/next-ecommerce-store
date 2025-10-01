@@ -9,11 +9,11 @@ import {
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Button from "../button";
-import { useStore } from "@/store/store";
+import { useCartStore } from "@/context/cart-store-provider";
 import Link from "next/link";
 import { useState } from "react";
 export default function CartModal() {
-    const { cart, setQuantity, increment, decrement, clearCart } = useStore();
+    const { cart, setQuantity, increment, decrement, clearCart } = useCartStore((state) => state);
 
     const handleQuantityChange = (
         itemName: string,

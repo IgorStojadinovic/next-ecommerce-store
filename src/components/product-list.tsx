@@ -4,6 +4,7 @@ import Link from "next/link";
 import categoryItems from "../lib/category-items";
 import gsap from "gsap";
 import { useRef } from "react";
+
 export default function ProductList() {
     const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -23,7 +24,7 @@ export default function ProductList() {
     };
 
     return (
-        <section className="py-10 flex flex-col md:flex-row justify-between items-end gap-4 md:pt-24 md:gap-2.5 md:pb-0 xl:pt-32">
+        <section className="py-10 flex flex-col md:flex-row justify-between items-end gap-4 md:pt-24 md:gap-2.5 md:pb-0 xl:pt-40">
             {Object.entries(categoryItems).map(([category, data], index) => (
                 <figure
                     key={category}

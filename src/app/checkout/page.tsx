@@ -2,14 +2,13 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { DesktopNavbar, MobileNavbar } from "@/components/navbar";
 import Link from "next/link";
-import { useStore } from "@/store/store";
-import SummaryField from "@/components/summary-field";
 import Button from "@/components/button";
 import CheckoutSection from "@/components/checkout-section";
 import CheckoutBillingDetails from "@/components/checkout-billing-details";
 import CheckoutPayment from "@/components/checkout-payment";
 import CheckoutShoppingInfo from "@/components/checkout-shopping-info";
 import CheckoutCart from "@/components/checkout-cart";
+import CheckoutPriceSummary from "@/components/checkout-price-summary";
 import { CheckoutFormValues } from "@/lib/types";
 
 export default function CheckoutPage() {
@@ -17,16 +16,6 @@ export default function CheckoutPage() {
     const onSubmit: SubmitHandler<CheckoutFormValues> = (data) => {
         console.log(data);
     };
-
-    const { cart } = useStore();
-
-    const total = cart.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-    );
-    const shipping = cart.length > 0 ? 50 : 0;
-    const vat = (cart.length > 0 ? total * 0.1 : 0).toFixed(2);
-    const grandTotal = cart.length > 0 ? total + shipping + parseFloat(vat) : 0;
 
     return (
         <>
@@ -60,20 +49,7 @@ export default function CheckoutPage() {
                             Summary
                         </p>
                         <CheckoutCart />
-                        <SummaryField label="Total" value={total.toString()} />
-
-                        <SummaryField
-                            label="Shipping"
-                            value={shipping.toString()}
-                        />
-                        <SummaryField
-                            label="VAT (included)"
-                            value={vat.toString()}
-                        />
-                        <SummaryField
-                            label="Grand Total"
-                            value={grandTotal.toString()}
-                        />
+                        <CheckoutPriceSummary />
                         <Button type="primary" className="w-full mt-8">
                             Continue & Pay
                         </Button>
