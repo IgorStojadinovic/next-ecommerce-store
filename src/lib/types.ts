@@ -1,3 +1,5 @@
+import { Recomendation } from "./recomendations";
+
 export type ProductItem = {
     name: string;
     description: string;
@@ -41,6 +43,7 @@ export type ProductPage = {
             desktop: string;
         };
     };
+    recomendations: Recomendation[];
 };
 
 export type CartItem = {

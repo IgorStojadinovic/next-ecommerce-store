@@ -1,4 +1,12 @@
 import { ProductPage } from "./types";
+import {
+    MarkIIRecomendation,
+    YX1Recomendation,
+    ZX7Recomendation,
+    MarkIRecomendation,
+    XX59Recomendation,
+    ZX9Recomendation,
+} from "./recomendations";
 
 const MarkIIPage: ProductPage = {
     title: "XX99 Mark II Headphones",
@@ -10,7 +18,8 @@ const MarkIIPage: ProductPage = {
     images: {
         mobile: "/assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg",
         tablet: "/assets/product-xx99-mark-two-headphones/tablet/image-category-page-preview.jpg",
-        desktop: "/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg",
+        desktop:
+            "/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg",
     },
     features: [
         "Featuring a genuine leather head strap and premium earcups, these headphones deliver superior comfort for those who like to enjoy endless listening. It includes intuitive controls designed for any situation. Whether you’re taking a business call or just in your own personal space, the auto on/off and pause features ensure that you’ll never miss a beat.",
@@ -43,6 +52,7 @@ const MarkIIPage: ProductPage = {
                 "/assets/product-xx99-mark-two-headphones/desktop/image-gallery-3.jpg",
         },
     },
+    recomendations: MarkIIRecomendation,
 };
 
 const MarkIPage: ProductPage = {
@@ -55,7 +65,8 @@ const MarkIPage: ProductPage = {
     images: {
         mobile: "/assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview.jpg",
         tablet: "/assets/product-xx99-mark-one-headphones/tablet/image-category-page-preview.jpg",
-        desktop: "/assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg",
+        desktop:
+            "/assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg",
     },
     features: [
         "Featuring a genuine leather head strap and premium earcups, these headphones deliver superior comfort for those who like to enjoy endless listening. It includes intuitive controls designed for any situation. Whether you’re taking a business call or just in your own personal space, the auto on/off and pause features ensure that you’ll never miss a beat.",
@@ -88,6 +99,7 @@ const MarkIPage: ProductPage = {
                 "/assets/product-xx99-mark-one-headphones/desktop/image-gallery-3.jpg",
         },
     },
+    recomendations: MarkIRecomendation,
 };
 
 const XX59Page: ProductPage = {
@@ -100,7 +112,8 @@ const XX59Page: ProductPage = {
     images: {
         mobile: "/assets/product-xx59-headphones/mobile/image-category-page-preview.jpg",
         tablet: "/assets/product-xx59-headphones/tablet/image-category-page-preview.jpg",
-        desktop: "/assets/product-xx59-headphones/desktop/image-category-page-preview.jpg",
+        desktop:
+            "/assets/product-xx59-headphones/desktop/image-category-page-preview.jpg",
     },
     features: [
         "Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move.",
@@ -132,6 +145,7 @@ const XX59Page: ProductPage = {
                 "/assets/product-xx59-headphones/desktop/image-gallery-3.jpg",
         },
     },
+    recomendations: XX59Recomendation,
 };
 
 const ZX9Page: ProductPage = {
@@ -144,7 +158,8 @@ const ZX9Page: ProductPage = {
     images: {
         mobile: "/assets/product-zx9-speaker/mobile/image-category-page-preview.jpg",
         tablet: "/assets/product-zx9-speaker/tablet/image-category-page-preview.jpg",
-        desktop: "/assets/product-zx9-speaker/desktop/image-category-page-preview.jpg",
+        desktop:
+            "/assets/product-zx9-speaker/desktop/image-category-page-preview.jpg",
     },
     features: [
         "Connect via Bluetooth or nearly any wired source. This speaker features optical, digital coaxial, USB Type-B, stereo RCA, and stereo XLR inputs, allowing you to have up to five wired source devices connected for easy switching. Improved bluetooth technology offers near lossless audio quality at up to 328ft (100m).",
@@ -174,6 +189,7 @@ const ZX9Page: ProductPage = {
             desktop: "/assets/product-zx9-speaker/desktop/image-gallery-3.jpg",
         },
     },
+    recomendations: ZX9Recomendation,
 };
 
 const ZX7Page: ProductPage = {
@@ -186,7 +202,8 @@ const ZX7Page: ProductPage = {
     images: {
         mobile: "/assets/product-zx7-speaker/mobile/image-category-page-preview.jpg",
         tablet: "/assets/product-zx7-speaker/tablet/image-category-page-preview.jpg",
-        desktop: "/assets/product-zx7-speaker/desktop/image-category-page-preview.jpg",
+        desktop:
+            "/assets/product-zx7-speaker/desktop/image-category-page-preview.jpg",
     },
     features: [
         "Reap the advantages of a flat diaphragm tweeter cone. This provides a fast response rate and excellent high frequencies that lower tiered bookshelf speakers cannot provide. The woofers are made from aluminum that produces a unique and clear sound. XLR inputs allow you to connect to a mixer for more advanced usage. ",
@@ -216,6 +233,7 @@ const ZX7Page: ProductPage = {
             desktop: "/assets/product-zx7-speaker/desktop/image-gallery-3.jpg",
         },
     },
+    recomendations: ZX7Recomendation,
 };
 
 const YX1Page: ProductPage = {
@@ -228,7 +246,8 @@ const YX1Page: ProductPage = {
     images: {
         mobile: "/assets/product-yx1-earphones/mobile/image-category-page-preview.jpg",
         tablet: "/assets/product-yx1-earphones/tablet/image-category-page-preview.jpg",
-        desktop: "/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg",
+        desktop:
+            "/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg",
     },
     features: [
         "Experience unrivalled stereo sound thanks to innovative acoustic technology. With improved ergonomics designed for full day wearing, these revolutionary earphones have been finely crafted to provide you with the perfect fit, delivering complete comfort all day long while enjoying exceptional noise isolation and truly immersive sound.",
@@ -261,6 +280,7 @@ const YX1Page: ProductPage = {
                 "/assets/product-yx1-earphones/desktop/image-gallery-3.jpg",
         },
     },
+    recomendations: YX1Recomendation,
 };
 
 export { MarkIPage, MarkIIPage, XX59Page, ZX9Page, ZX7Page, YX1Page };
