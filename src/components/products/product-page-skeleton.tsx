@@ -3,15 +3,17 @@ import { ProductPage as ProductPageType } from "@/lib/types";
 import { Input } from "../ui/input";
 import Link from "next/link";
 import Button from "../button";
-import { useStore } from "@/store/store";
+import { useCartStore } from "@/context/cart-store-provider";
 import { useEffect } from "react";
+import Recomended from "../recomended";
+import CTA from "../cta";
 export default function ProductPageSkeleton({
     product,
 }: {
     product: ProductPageType;
 }) {
     const { addToCart, quantity, increment, decrement, setQuantity } =
-        useStore();
+        useCartStore((state) => state);
 
     useEffect(() => {
         setQuantity(product.title, 0);
@@ -195,6 +197,8 @@ export default function ProductPageSkeleton({
                     )}
                 </div>
             </section>
+            <Recomended recomendations={product.recomendations} />
+            <CTA />
         </div>
     );
 }
