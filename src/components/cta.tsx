@@ -1,6 +1,6 @@
 export default function CTA() {
     return (
-        <section className="text-center my-[120px] lg:flex flex-row-reverse justify-between xl:gap-[125px] lg:gap-10">
+        <section className="text-center py-[120px] lg:py-40 lg:flex flex-row-reverse justify-between xl:gap-[125px] lg:gap-10">
             <picture>
                 <source
                     media="(min-width: 1024px)"
