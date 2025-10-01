@@ -20,7 +20,7 @@ export default function SpeakerZX7() {
             </picture>
             <article className="flex flex-col items-start justify-center gap-6 text-black z-10 absolute top-0 h-full w-full px-6 md:px-16 xl:px-24">
                 <h4>ZX7 Speaker</h4>
-                <Link href="/products/speakers/zx7-speaker">
+                <Link href="/products/speakers/zx7">
                     <Button type="ghost">see product</Button>
                 </Link>
             </article>

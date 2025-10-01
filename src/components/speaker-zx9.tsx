@@ -47,7 +47,7 @@ export default function SpeakerZX9() {
                     Upgrade to premium speakers that are phenomenally built to
                     deliver truly remarkable sound.
                 </p>
-                <Link href="/products/speakers/zx9-speaker">
+                <Link href="/products/speakers/zx9">
                     <Button type="dark" className="md:mt-4">
                         see product
                     </Button>
