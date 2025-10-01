@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/footer";
-import { DesktopNavbar, MobileNavbar } from "@/components/navbar";
+import { CartStoreProvider } from "@/context/cart-store-provider";
 
 const manrope = Manrope({
     subsets: ["latin"],
@@ -24,7 +24,9 @@ export default function RootLayout({
             <body className={`${manrope.variable} antialiased`}>
                 <div id="smooth-wrapper">
                     <div id="smooth-content">
-                        <main>{children}</main>
+                        <CartStoreProvider>
+                            <main>{children}</main>
+                        </CartStoreProvider>
                         <Footer />
                     </div>
                 </div>
