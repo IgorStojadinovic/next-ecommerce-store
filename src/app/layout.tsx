@@ -12,9 +12,6 @@ const manrope = Manrope({
 export const metadata: Metadata = {
     title: "audiophile",
     description: "portfolio project",
-    verification: {
-        google: "google54d552e6d2b4b178.html",
-    },
 };
 
 export default function RootLayout({
