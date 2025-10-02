@@ -10,8 +10,10 @@ import CheckoutShoppingInfo from "@/components/checkout-shopping-info";
 import CheckoutCart from "@/components/checkout-cart";
 import CheckoutPriceSummary from "@/components/checkout-price-summary";
 import { CheckoutFormValues } from "@/lib/types";
+import { useCartStore } from "@/context/cart-store-provider";
 
 export default function CheckoutPage() {
+    const cart = useCartStore((state) => state.cart);
     const { register, handleSubmit } = useForm<CheckoutFormValues>();
     const onSubmit: SubmitHandler<CheckoutFormValues> = (data) => {
         console.log(data);
@@ -44,16 +46,38 @@ export default function CheckoutPage() {
                         <CheckoutPayment register={register} />
                     </CheckoutSection>
                     {/** Summary */}
-                    <CheckoutSection className="bg-white flex flex-col  p-6 rounded-md md:p-8 lg:w-1/3 lg:h-1/3">
-                        <p className="text-[18px] leading-auto font-bold uppercase pb-8">
-                            Summary
-                        </p>
-                        <CheckoutCart />
-                        <CheckoutPriceSummary />
-                        <Button type="primary" className="w-full mt-8">
-                            Continue & Pay
-                        </Button>
-                    </CheckoutSection>
+                    {cart.length > 0 ? (
+                        <CheckoutSection className="bg-white flex flex-col  p-6 rounded-md md:p-8 lg:w-1/3 lg:h-1/3">
+                            <p className="text-[18px] leading-auto font-bold uppercase pb-8">
+                                Summary
+                            </p>
+                            <CheckoutCart />
+                            <CheckoutPriceSummary />
+                            <Button
+                                type="primary"
+                                className="w-full mt-8"
+                                disabled={cart.length === 0}
+                            >
+                                Continue & Pay
+                            </Button>
+                        </CheckoutSection>
+                    ) : (
+                        <CheckoutSection className="bg-white flex flex-col  p-6 rounded-md md:p-8 lg:w-1/3 lg:h-1/3">
+                            <p className="text-[18px] leading-auto font-bold uppercase pb-8">
+                                Summary
+                            </p>
+                            <p className="text-sm text-black/50">
+                                Please add items to your cart
+                            </p>
+                            <Button
+                                type="primary"
+                                className="w-full mt-8"
+                                disabled={cart.length === 0}
+                            >
+                                Continue & Pay
+                            </Button>
+                        </CheckoutSection>
+                    )}
                 </form>
             </div>
         </>

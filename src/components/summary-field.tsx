@@ -20,11 +20,8 @@ export default function SummaryField({
             )}
         >
             <p className="text-sm font-bold">{label}</p>
-            {value ? (
-                <p className="text-sm font-bold ">$ {value}</p>
-            ) : (
-                <p className="text-sm font-bold animate-pulse">$ 0</p>
-            )}
+
+            <p className="text-sm font-bold ">$ {value}</p>
         </div>
     );
 }

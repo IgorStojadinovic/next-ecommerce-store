@@ -12,9 +12,12 @@ import Button from "../button";
 import { useCartStore } from "@/context/cart-store-provider";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 export default function CartModal() {
-    const { cart, setQuantity, increment, decrement, clearCart } = useCartStore((state) => state);
-
+    const { cart, setQuantity, increment, decrement, clearCart } = useCartStore(
+        (state) => state
+    );
+    const pathname = usePathname();
     const handleQuantityChange = (
         itemName: string,
         e: React.ChangeEvent<HTMLInputElement>
@@ -132,11 +135,25 @@ export default function CartModal() {
                         ${cart.reduce((acc, item) => acc + item.price, 0)}
                     </p>
                 </div>
-                <Link href="/checkout">
-                    <Button type="primary" className="w-full" onClick={() => setIsOpen(false)}>
-                        Checkout
+                {pathname === "/checkout" ? (
+                    <Button
+                        type="primary"
+                        className="w-full"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Close
                     </Button>
-                </Link>
+                ) : (
+                    <Link href="/checkout">
+                        <Button
+                            type="primary"
+                            className="w-full"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Checkout
+                        </Button>
+                    </Link>
+                )}
             </DialogContent>
         </Dialog>
     );

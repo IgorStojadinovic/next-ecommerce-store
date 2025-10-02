@@ -5,10 +5,12 @@ export default function Button({
     children,
     className,
     onClick,
+    disabled,
 }: {
     type: "primary" | "secondary" | "dark" | "ghost" | "cart";
     children: React.ReactNode;
     className?: string;
+    disabled?: boolean;
     onClick?: () => void;
 }) {
     const buttonTypes = {
@@ -19,6 +21,7 @@ export default function Button({
             "before:bg-(--color-orange-secondary) before:transition-[left] before:duration-300 before:ease-in-out",
             "before:transform before:skew-x-[45deg] before:-z-[1]",
             "hover:before:left-0",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
         ].join(" "),
 
         secondary: [
@@ -28,6 +31,7 @@ export default function Button({
             "before:bg-black before:transition-[left] before:duration-300 before:ease-in-out",
             "before:transform before:skew-x-[45deg] before:-z-[1]",
             "hover:before:left-0 hover:text-white",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
         ].join(" "),
 
         dark: [
@@ -37,6 +41,7 @@ export default function Button({
             "before:bg-(--color-orange-primary) before:transition-[left] before:duration-300 before:ease-in-out",
             "before:transform before:skew-x-[45deg] before:-z-[1]",
             "hover:before:left-0 hover:text-white hover:border hover:border-black",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
         ].join(" "),
 
         ghost: [
@@ -46,17 +51,23 @@ export default function Button({
             "before:bg-black before:transition-[left] before:duration-300 before:ease-in-out",
             "before:transform before:skew-x-[45deg] before:-z-[1]",
             "hover:before:left-0 hover:text-white",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
         ].join(" "),
 
         cart: [
             "bg-transparent text-black/50 cursor-pointer",
             "uppercase text-[0.813rem] font-bold tracking-[1px] flex justify-center items-center",
             "hover:bg-black/10 transition-colors duration-300 hover:text-(--color-orange-primary)",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
         ].join(" "),
     };
 
     return (
-        <button className={cn(buttonTypes[type], className)} onClick={onClick}>
+        <button
+            className={cn(buttonTypes[type], className)}
+            onClick={onClick}
+            disabled={disabled}
+        >
             {children}
         </button>
     );
