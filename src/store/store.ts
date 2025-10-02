@@ -118,7 +118,7 @@ export const createCartStore = (initState: CartState = defaultInitialState) => {
                             .filter((item) => item.quantity > 0),
 
                         quantity:
-                            state.quantity - 1 > 0 ? state.quantity - 1 : 0,
+                            state.quantity - 1 > 0 ? state.quantity - 1 : 1,
                     })),
             }),
             {
