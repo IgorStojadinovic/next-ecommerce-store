@@ -66,3 +66,18 @@ export type CheckoutFormValues = {
     cardNumber: string;
     cardPin: string;
 };
+
+export type LoginFormValues = {
+    email: string;
+    password: string;
+};
+
+export type User = {
+    email: string;
+    name: string;
+    address: string;
+    phone: string;
+    zip: string;
+    city: string;
+    state: string;
+};
