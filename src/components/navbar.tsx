@@ -141,7 +141,7 @@ export function DesktopNavbar({ className }: { className?: string }) {
                 </ul>
                 <div className="flex items-center gap-4">
                     {/*   <AccountDropdown /> */}
-                    <LoginModal />
+                 {/*    <LoginModal /> */}
                     <CartModal />
                 </div>
             </div>
