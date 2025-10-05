@@ -1,14 +1,5 @@
-import NextAuth, { Session, User as NextAuthUser } from "next-auth";
+import NextAuth, { Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
-
-type UserWithExtra = NextAuthUser & {
-    address?: string;
-    phone?: string;
-    zip?: string;
-    city?: string;
-    state?: string;
-};
-
 import Credentials from "next-auth/providers/credentials";
 import prisma from "@/prisma/client";
 import bcrypt from "bcrypt";
@@ -30,7 +21,7 @@ export const authOptions = {
                 },
             };
         },
-        async jwt({ token, user }: { token: JWT; user: UserWithExtra }) {
+        async jwt({ token, user }: { token: JWT; user: User | undefined }) {
             if (user) {
                 return {
                     ...token,
@@ -84,8 +75,7 @@ export const authOptions = {
                 if (!passwordMatch) {
                     throw new Error("Invalid password");
                 }
-                console.log("Successfully logged in:", credentials.email);
-                console.log(user);
+
                 return { ...user, id: user.id.toString() };
             },
         }),
