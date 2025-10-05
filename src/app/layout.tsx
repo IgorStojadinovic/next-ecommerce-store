@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/footer";
 import { CartStoreProvider } from "@/context/cart-store-provider";
+import { SessionProvider } from "next-auth/react";
 
 const manrope = Manrope({
     subsets: ["latin"],
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     description: "portfolio project",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -24,10 +25,12 @@ export default function RootLayout({
             <body className={`${manrope.variable} antialiased`}>
                 <div id="smooth-wrapper">
                     <div id="smooth-content">
-                        <CartStoreProvider>
-                            <main>{children}</main>
-                        </CartStoreProvider>
-                        <Footer />
+                        <SessionProvider>
+                            <CartStoreProvider>
+                                <main>{children}</main>
+                            </CartStoreProvider>
+                            <Footer />
+                        </SessionProvider>
                     </div>
                 </div>
             </body>
