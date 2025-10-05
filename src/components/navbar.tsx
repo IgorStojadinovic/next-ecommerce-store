@@ -13,13 +13,14 @@ import {
 } from "@/components/ui/sheet";
 import { useState } from "react";
 import NavbarList from "./navbar-list";
+import LoginModal from "./auth/login-modal";
 export function MobileNavbar({ className }: { className?: string }) {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <header>
             <nav
                 className={cn(
-                    "z-20 py-8 flex justify-between items-center absolute md:border-b-[1px] md:border-(--color-gray)/50  w-full px-6 md:px-10  xl:px-24 lg:hidden",
+                    "z-20 py-8 flex justify-between items-center absolute md:border-b-[1px] md:border-(--color-gray)/50  w-full px-6 md:px-10  xl:px-24 lg:hidden ",
                     className
                 )}
             >
@@ -95,8 +96,12 @@ export function DesktopNavbar({ className }: { className?: string }) {
                             href="/products/headphones"
                             className={
                                 currentPath.includes("/products/headphones") ||
-                                currentPath.includes("/products/headphones/xx59") ||
-                                currentPath.includes("/products/headphones/xx99")
+                                currentPath.includes(
+                                    "/products/headphones/xx59"
+                                ) ||
+                                currentPath.includes(
+                                    "/products/headphones/xx99"
+                                )
                                     ? "text-(--color-orange-primary)"
                                     : "hover:text-(--color-orange-primary) transition-colors duration-300"
                             }
@@ -134,8 +139,11 @@ export function DesktopNavbar({ className }: { className?: string }) {
                         </Link>
                     </li>
                 </ul>
-
-                <CartModal />
+                <div className="flex items-center gap-4">
+                    {/*   <AccountDropdown /> */}
+                    <LoginModal />
+                    <CartModal />
+                </div>
             </div>
         </nav>
     );

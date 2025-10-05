@@ -18,21 +18,21 @@ export default function CheckoutBillingDetails({
                     name="name"
                     placeholder="Alexei Ward"
                     register={register}
-                    className=""
+                    inputClassName="h-12 focus-visible:ring-0"
                 />
                 <FormInput
                     label="Email"
                     name="email"
                     placeholder="alexei@mail.com"
                     register={register}
-                    className=""
+                    inputClassName="h-12 focus-visible:ring-0"
                 />
                 <FormInput
                     label="Phone"
                     name="phone"
                     placeholder="+1 202-555-0136"
                     register={register}
-                    className=""
+                    inputClassName="h-12 focus-visible:ring-0"
                 />
             </div>
         </section>

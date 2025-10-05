@@ -18,24 +18,28 @@ export default function CheckoutShoppingInfo({
                     placeholder="1133 Burwood Way"
                     register={register}
                     className="md:col-span-2"
+                    inputClassName="h-12 focus-visible:ring-0"
                 />
                 <FormInput
                     label="City"
                     name="city"
                     placeholder="Albuquerque"
                     register={register}
+                    inputClassName="h-12 focus-visible:ring-0"
                 />
                 <FormInput
                     label="Zip"
                     name="zip"
                     placeholder="87110"
                     register={register}
+                    inputClassName="h-12 focus-visible:ring-0"
                 />
                 <FormInput
                     label="State"
                     name="state"
                     placeholder="New Mexico"
                     register={register}
+                    inputClassName="h-12 focus-visible:ring-0"
                 />
             </div>
         </section>

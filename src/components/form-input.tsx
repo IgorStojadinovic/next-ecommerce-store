@@ -10,6 +10,7 @@ interface FormInputProps<T extends FieldValues> {
     register: UseFormRegister<T>;
     type?: string;
     className?: string;
+    inputClassName?: string;
 }
 
 export function FormInput<T extends FieldValues>({
@@ -19,6 +20,7 @@ export function FormInput<T extends FieldValues>({
     register,
     type = "text",
     className,
+    inputClassName,
 }: FormInputProps<T>) {
     return (
         <div className={cn("flex flex-col gap-2", className)}>
@@ -27,7 +29,7 @@ export function FormInput<T extends FieldValues>({
                 type={type}
                 {...register(name)}
                 placeholder={placeholder}
-                className="py-4 px-6 rounded-lg border border-gray-200 placeholder:text-black/50"
+                className={cn("py-4 px-6 rounded-lg border border-gray-200 placeholder:text-black/50", inputClassName)}
             />
         </div>
     );
