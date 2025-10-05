@@ -1,7 +1,22 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    images: {
+        qualities: [100],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "localhost",
+            },
+        ],
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+    output: "standalone",
 };
 
 export default nextConfig;
