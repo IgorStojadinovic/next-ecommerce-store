@@ -3,14 +3,16 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-    const token = await getToken({ req: request });
+    const token = await getToken({
+        req: request,
+        secret: process.env.NEXTAUTH_SECRET,
+    });
+
     const isAuthPage = request.nextUrl.pathname.startsWith("/account");
 
-    if (isAuthPage) {
-        if (!token) {
-            const url = new URL("/", request.url);
-            return NextResponse.redirect(url);
-        }
+    if (isAuthPage && !token) {
+        const url = new URL("/", request.url);
+        return NextResponse.redirect(url);
     }
 
     return NextResponse.next();
