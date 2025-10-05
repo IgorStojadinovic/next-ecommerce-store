@@ -1,16 +1,13 @@
 # Audiophile E-commerce Website
 
-This project is a fullstack e-commerce platform dedicated to selling high-quality audio equipment. It provides users with a seamless shopping experience, featuring a wide range of products from headphones to speakers. The application includes Stripe integration for secure and efficient payment processing.
-
+This project is a e-commerce platform dedicated to selling high-quality audio equipment. It provides users with a seamless shopping experience, featuring a wide range of products from headphones to speakers.
 ## Technologies Used
 
 -   ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 -   ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 -   ![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white) 
 -   ![React Hook Form](https://img.shields.io/badge/React_Hook_Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white) 
--   ![Context API](https://img.shields.io/badge/Context_API-61DAFB?style=for-the-badge&logo=react&logoColor=white) 
--   ![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=stripe&logoColor=white) 
--   ![Auth.js](https://img.shields.io/badge/Auth.js-000000?style=for-the-badge&logo=auth0&logoColor=white)
+-   ![Context API](https://img.shields.io/badge/Context_API-61DAFB?style=for-the-badge&logo=react&logoColor=white)  
 
 ## Features
 
