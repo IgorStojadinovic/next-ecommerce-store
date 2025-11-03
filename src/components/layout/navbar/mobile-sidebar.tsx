@@ -14,7 +14,7 @@ export default function MobileSidebar() {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger>
+            <SheetTrigger className="cursor-pointer focus-visible:outline-none focus:outline-none">
                 <Image
                     src={"/assets/menu.svg"}
                     alt="logo"

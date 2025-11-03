@@ -3,15 +3,18 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import CartModal from "../../cart/cartmodal";
-import LoginModal from "../../auth/login-modal";
 import MobileSidebar from "./mobile-sidebar";
-import AccountModal from "../../auth/account-dropdown";
 import DesktopLinks from "./desktop-links";
 import Container from "../container";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import AuthButton from "./authButton";
 
-export function MobileNavbar({ className }: { className?: string }) {
+type NavbarProps = {
+    className?: string;
+    isAuthenticated: boolean;
+};
+
+export function MobileNavbar({ className, isAuthenticated }: NavbarProps) {
     return (
         <nav
             className={cn(
@@ -22,22 +25,26 @@ export function MobileNavbar({ className }: { className?: string }) {
             <div className={cn("flex md:items-center gap-10  flex-1")}>
                 <MobileSidebar />
 
-                <Image
-                    src={"/assets/audiophile-logo.svg"}
-                    alt="logo"
-                    width={143}
-                    height={25}
-                    className=" h-[25px] justify-self-center  w-full md:w-auto"
-                />
+                <Link href="/" className="flex-1">
+                    <Image
+                        src={"/assets/audiophile-logo.svg"}
+                        alt="logo"
+                        width={143}
+                        height={25}
+                        className=" h-[25px] justify-self-center  w-full md:w-auto"
+                    />
+                </Link>
             </div>
-            <CartModal />
+            <div className="flex gap-4 items-center">
+                <AuthButton isAuthenticated={isAuthenticated} />
+                <CartModal />
+            </div>
         </nav>
     );
 }
 
-export function DesktopNavbar({ className }: { className?: string }) {
+export function DesktopNavbar({ className, isAuthenticated }: NavbarProps) {
     const pathname = usePathname();
-    const { data: session } = useSession();
     const isProductsPage = pathname.includes("/products");
 
     return (
@@ -60,7 +67,7 @@ export function DesktopNavbar({ className }: { className?: string }) {
                     </Link>
                     <DesktopLinks />
                     <div className=" flex justify-center items-center gap-4">
-                        {session ? <AccountModal /> : <LoginModal />}
+                        <AuthButton isAuthenticated={isAuthenticated} />
                         <CartModal />
                     </div>
                 </div>
