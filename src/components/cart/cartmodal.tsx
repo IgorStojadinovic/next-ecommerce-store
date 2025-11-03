@@ -38,7 +38,7 @@ export default function CartModal() {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger className="relative flex items-center justify-center">
+            <DialogTrigger className="relative flex items-center justify-center focus-visible:outline-none focus:outline-none">
                 {cart.length > 0 && (
                     <span className="absolute flex size-3 top-[-5px] right-[-10px]">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-(--color-orange-primary) opacity-75"></span>

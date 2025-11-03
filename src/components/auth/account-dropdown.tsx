@@ -23,7 +23,9 @@ export default function AccountDropdown() {
         <>
             <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
                 <DropdownMenuTrigger
-                    className={"cursor-pointer  h-[24px] w-[24px]"}
+                    className={
+                        "cursor-pointer h-[24px] w-[24px] focus-visible:outline-none focus:outline-none"
+                    }
                 >
                     <Avatar className="h-[24px] w-[24px]">
                         <AvatarImage
@@ -44,7 +46,7 @@ export default function AccountDropdown() {
                         className="cursor-pointer"
                         onClick={() => setIsOpen(false)}
                     >
-                        <Link href="/account">Settings</Link>
+                        <Link href="/account">Dashboard</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem
                         className="cursor-pointer"

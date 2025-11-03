@@ -16,7 +16,7 @@ export default function LoginModal() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger
                 className={
-                    "flex items-center justify-center cursor-pointer group"
+                    "flex items-center justify-center cursor-pointer group focus-visible:outline-none focus:outline-none"
                 }
             >
                 <Avatar className="h-[24px] w-[24px]">
