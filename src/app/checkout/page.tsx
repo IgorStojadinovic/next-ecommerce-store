@@ -1,6 +1,5 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { DesktopNavbar, MobileNavbar } from "@/components/layout/navbar/navbar";
 import Link from "next/link";
 import Button from "@/components/shared/button";
 import CheckoutSection from "@/components/checkout/checkout-section";

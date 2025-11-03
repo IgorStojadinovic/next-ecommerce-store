@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useOptimistic, startTransition } from "react";
 import { toast } from "sonner";
 
 const addressSchema = z.object({
@@ -30,26 +30,54 @@ export default function AddressPage() {
     });
 
     const [isLoading, setIsLoading] = useState(false);
+    const [optimisticUser, addOptimisticUser] = useOptimistic(
+        session?.user,
+        (state, newData: AddressFormValues) => ({
+            ...state,
+            ...newData,
+            id: state?.id || "",
+            email: state?.email || "",
+        })
+    );
+/* 
+    useEffect(() => {
+        if (session?.user) {
+            setValue("name", session.user.name || "");
+            setValue("address", session.user.address || "");
+            setValue("phone", session.user.phone || "");
+            setValue("zip", session.user.zip || "");
+            setValue("city", session.user.city || "");
+            setValue("state", session.user.state || "");
+        }
+    }, [session]); */
 
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm<AddressFormValues>({
         resolver: zodResolver(addressSchema),
         defaultValues: {
-            name: session?.user?.name || "",
-            address: session?.user?.address || "",
-            phone: session?.user?.phone || "",
-            zip: session?.user?.zip || "",
-            city: session?.user?.city || "",
-            state: session?.user?.state || "",
+            name: session?.user?.name as string || "",
+            address: session?.user?.address as string   || "",
+            phone: session?.user?.phone as string || "",
+            zip: session?.user?.zip as string || "",
+            city: session?.user?.city as string || "",
+            state: session?.user?.state as string || "",
         },
     });
 
+    console.log("SESSION USER", session?.user);
+
     const onSubmit = async (data: AddressFormValues) => {
         setIsLoading(true);
+
         try {
+            startTransition(() => {
+                addOptimisticUser(data);
+            });
+
             const response = await fetch("/api/user/update", {
                 method: "PUT",
                 headers: {
@@ -62,7 +90,14 @@ export default function AddressPage() {
                 throw new Error("An error occurred while updating the data");
             }
 
-            await update();
+            await update({
+                ...session,
+                user: {
+                    ...session?.user,
+                    ...data,
+                },
+            });
+
             toast.success("Data updated successfully");
         } catch (error) {
             toast.error("An error occurred while updating the data");
@@ -80,12 +115,12 @@ export default function AddressPage() {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="flex items-center gap-2">
                         <label className="text-sm font-medium">Email</label>
-                        <p className="text-gray-700">{session?.user?.email}</p>
+                        <p className="text-gray-700">{optimisticUser?.email}</p>
                     </div>
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm font-medium">Name</label>
-                        <Input {...register("name")}  className="rounded-xs"/>
+                        <Input {...register("name")} className="rounded-xs" />
                         {errors.name && (
                             <p className="text-red-500 text-sm mt-1">
                                 {errors.name.message}
@@ -95,7 +130,10 @@ export default function AddressPage() {
 
                     <div className="flex flex-col gap-2">
                         <label className="text-sm font-medium">Address</label>
-                        <Input {...register("address")} className="rounded-xs"/>
+                        <Input
+                            {...register("address")}
+                            className="rounded-xs"
+                        />
                         {errors.address && (
                             <p className="text-red-500 text-sm mt-1">
                                 {errors.address.message}
@@ -105,7 +143,7 @@ export default function AddressPage() {
 
                     <div>
                         <label className="text-sm font-medium">Phone</label>
-                        <Input {...register("phone")} className="rounded-xs"/>
+                        <Input {...register("phone")} className="rounded-xs" />
                         {errors.phone && (
                             <p className="text-red-500 text-sm mt-1">
                                 {errors.phone.message}
@@ -115,7 +153,7 @@ export default function AddressPage() {
 
                     <div>
                         <label className="text-sm font-medium">ZIP</label>
-                        <Input {...register("zip")} className="rounded-xs"/>
+                        <Input {...register("zip")} className="rounded-xs" />
                         {errors.zip && (
                             <p className="text-red-500 text-sm mt-1">
                                 {errors.zip.message}
@@ -125,7 +163,7 @@ export default function AddressPage() {
 
                     <div>
                         <label className="text-sm font-medium">City</label>
-                        <Input {...register("city")} className="rounded-xs"/>
+                        <Input {...register("city")} className="rounded-xs" />
                         {errors.city && (
                             <p className="text-red-500 text-sm mt-1">
                                 {errors.city.message}
@@ -135,7 +173,7 @@ export default function AddressPage() {
 
                     <div>
                         <label className="text-sm font-medium">State</label>
-                        <Input {...register("state")} className="rounded-xs"/>
+                        <Input {...register("state")} className="rounded-xs" />
                         {errors.state && (
                             <p className="text-red-500 text-sm mt-1">
                                 {errors.state.message}

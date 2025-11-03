@@ -1,12 +1,11 @@
 "use client";
-import ProductList from "../components/product-list";
-import SpeakerZX9 from "../components/speaker-zx9";
-import SpeakerZX7 from "../components/speaker-zx7";
-import EarphonesYX1 from "../components/earphones-yx1";
+import ProductList from "../components/shared/product-list";
+import SpeakerZX9 from "../components/home/featured-products/speaker-zx9";
+import SpeakerZX7 from "../components/home/featured-products/speaker-zx7";
+import EarphonesYX1 from "../components/home/featured-products/earphones-yx1";
 import CTA from "../components/cta";
-import HeroSection from "../components/hero-section";
-import Container from "../components/container";
-import { MobileNavbar } from "@/components/navbar";
+import HeroSection from "../components/home/hero-section/hero-section";
+import Container from "../components/layout/container";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollSmoother from "gsap/dist/ScrollSmoother";
@@ -29,7 +28,6 @@ export default function Home() {
 
     return (
         <>
-            <MobileNavbar />
             <HeroSection />
             <Container>
                 <ProductList />
