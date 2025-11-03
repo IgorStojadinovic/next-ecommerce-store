@@ -1,6 +1,6 @@
 import ProductPageSkeleton from "@/components/products/product-page-skeleton";
-import { YX1Page } from "@/lib/product-page";
+import { YX1Page } from "@/lib/services/product-page";
 
 export default function WirelessEarphonesPage() {
-    return <ProductPageSkeleton product={YX1Page} />;   
+    return <ProductPageSkeleton product={YX1Page} />;
 }

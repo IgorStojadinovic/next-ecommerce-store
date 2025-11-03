@@ -1,5 +1,5 @@
 import ProductPageSkeleton from "@/components/products/product-page-skeleton";
-import { XX59Page } from "@/lib/product-page";
+import { XX59Page } from "@/lib/services/product-page";
 
 export default function XX59HeadphonesPage() {
     return <ProductPageSkeleton product={XX59Page} />;

@@ -1,6 +1,6 @@
 import ProductItem from "@/components/products/product-item";
-import { EarphoneItems } from "@/lib/product-items";
-import ProductList from "@/components/product-list";
+import { EarphoneItems } from "@/lib/data/product-items";
+import ProductList from "@/components/shared/product-list";
 import CTA from "@/components/cta";
 import PageHeader from "@/components/products/page-header";
 

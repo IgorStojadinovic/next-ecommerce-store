@@ -1,6 +1,6 @@
 import ProductItem from "@/components/products/product-item";
-import { SpeakerItems } from "@/lib/product-items";
-import ProductList from "@/components/product-list";
+import { SpeakerItems } from "@/lib/data/product-items";
+import ProductList from "@/components/shared/product-list";
 import CTA from "@/components/cta";
 import PageHeader from "@/components/products/page-header";
 
