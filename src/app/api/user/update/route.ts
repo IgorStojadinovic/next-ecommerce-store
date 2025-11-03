@@ -1,35 +1,26 @@
-import { auth } from "@/app/api/auth/[...nextauth]/route";
-import prisma from "@/lib/prisma";
+import { auth } from "@/lib/auth/config";
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/db/prisma";
 
 export async function PUT(request: Request) {
-    const session = await auth();
-
-    if (!session?.user?.id) {
-        return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     try {
+        const session = await auth();
         const body = await request.json();
-        const { name, address, phone, zip, city, state } = body;
 
-        const updatedUser = await prisma.user.update({
+        if (!session?.user?.id) {
+            return new NextResponse("Unauthorized", { status: 401 });
+        }
+
+        const user = await prisma.user.update({
             where: {
-                id: parseInt(session.user.id),
+                id: session.user.id,
             },
-            data: {
-                name,
-                address,
-                phone,
-                zip,
-                city,
-                state,
-            },
+            data: body,
         });
 
-        return NextResponse.json(updatedUser);
-    } catch (error) {
-        console.error("Error updating user:", error);
+        return NextResponse.json(user);
+    } catch {
+        console.error("[USER_UPDATE]");
         return new NextResponse("Internal error", { status: 500 });
     }
 }

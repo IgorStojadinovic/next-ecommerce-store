@@ -1,24 +1,27 @@
-import { auth } from "@/app/api/auth/[...nextauth]/route";
-import prisma from "@/lib/prisma";
+import { auth } from "@/lib/auth/config";
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/db/prisma";
 
 export async function GET() {
-    const session = await auth();
-
-    if (!session?.user?.id) {
-        console.log("No user ID in session:", session);
-        return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     try {
+        const session = await auth();
+
+        if (!session?.user?.id) {
+            return new NextResponse("Unauthorized", { status: 401 });
+        }
+
         const orders = await prisma.order.findMany({
             where: {
-                userId: parseInt(session.user.id),
+                userId: session.user.id as string,
             },
             include: {
                 items: {
                     include: {
-                        product: true,
+                        product: {
+                            select: {
+                                name: true,
+                            },
+                        },
                     },
                 },
             },
@@ -29,7 +32,7 @@ export async function GET() {
 
         return NextResponse.json(orders);
     } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error("[ORDERS_GET]", error);
         return new NextResponse("Internal error", { status: 500 });
     }
 }
