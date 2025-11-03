@@ -21,7 +21,7 @@
         "paths": {
             "@/*": ["./src/*"],
             "@/prisma/client": ["./prisma/client.ts"],
-            "@/lib/validations": ["./src/lib/validations.ts"],
+            "@/lib/validations": ["./src/lib/zod-validators/index.ts"],
             "@/components/icons": ["./src/components/icons"]
         }
     },
