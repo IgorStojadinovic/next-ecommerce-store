@@ -1,7 +1,7 @@
 "use client";
 import { ProductPage as ProductPageType } from "@/lib/types";
 import Link from "next/link";
-import Recomended from "../recomended";
+import Recomended from "../shared/recomended";
 import CTA from "../cta";
 import ProductPageImage from "./product-page-image";
 import ProductPageItemDesc from "./product-page-item-desc";

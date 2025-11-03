@@ -1,4 +1,4 @@
-import { Recomendation } from "@/lib/recomendations";
+import { Recomendation } from "@/lib/data/recomendations";
 import Button from "./button";
 import Link from "next/link";
 export default function Recomended({
@@ -9,7 +9,7 @@ export default function Recomended({
     return (
         <section className="">
             <h2 className=" text-center text-4xl font-bold md:pb-14 pb-10 lg:pb-16">
-                 you may also like
+                you may also like
             </h2>
             <div className="flex flex-col items-center  md:gap-2.5 md:flex-row ">
                 {recomendations.map((recomendation) => (

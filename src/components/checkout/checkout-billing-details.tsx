@@ -1,4 +1,4 @@
-import { FormInput } from "./form-input";
+import { FormInput } from "../forms/form-input";
 import { UseFormRegister } from "react-hook-form";
 import { CheckoutFormValues } from "@/lib/types";
 

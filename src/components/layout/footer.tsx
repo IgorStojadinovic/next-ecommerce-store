@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import SocialLinks from "./socal-links";
+import SocialLinks from "../shared/socal-links";
 import { usePathname } from "next/navigation";
 export default function Footer() {
     const currentPath = usePathname();

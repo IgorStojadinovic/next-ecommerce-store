@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import Button from "../button";
-import { useCartStore } from "@/context/cart-store-provider";
+import Button from "../shared/button";
+import { useCartStore } from "@/store/providers/cart-store-provider";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";

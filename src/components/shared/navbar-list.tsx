@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import categoryItems from "../lib/category-items";
+import categoryItems from "../../lib/data/category-items";
 
 const NavbarList = ({
     className,

@@ -1,7 +1,7 @@
 import { ProductPage as ProductPageType } from "@/lib/types";
-import Button from "../button";
+import Button from "../shared/button";
 import { Input } from "../ui/input";
-import { useCartStore } from "@/context/cart-store-provider";
+import { useCartStore } from "@/store/providers/cart-store-provider";
 import { useCallback, useEffect } from "react";
 
 export default function ProductPageItemDesc({

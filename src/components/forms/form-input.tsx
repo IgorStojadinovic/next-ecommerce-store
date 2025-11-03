@@ -1,6 +1,6 @@
 import { UseFormRegister, FieldValues, Path } from "react-hook-form";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import { cn } from "@/lib/utils";
 
 interface FormInputProps<T extends FieldValues> {
@@ -11,6 +11,7 @@ interface FormInputProps<T extends FieldValues> {
     type?: string;
     className?: string;
     inputClassName?: string;
+    value?: string;
 }
 
 export function FormInput<T extends FieldValues>({
@@ -21,6 +22,7 @@ export function FormInput<T extends FieldValues>({
     type = "text",
     className,
     inputClassName,
+    value,
 }: FormInputProps<T>) {
     return (
         <div className={cn("flex flex-col gap-2", className)}>
@@ -30,6 +32,7 @@ export function FormInput<T extends FieldValues>({
                 {...register(name)}
                 placeholder={placeholder}
                 className={cn("py-4 px-6 rounded-lg border border-gray-200 placeholder:text-black/50", inputClassName)}
+                value={value}
             />
         </div>
     );

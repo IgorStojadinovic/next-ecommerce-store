@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "./button";
+import Button from "../../shared/button";
 
 export default function EarphonesYX1() {
     return (

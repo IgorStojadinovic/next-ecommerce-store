@@ -1,5 +1,5 @@
 "use client";
-import { useCartStore } from "@/context/cart-store-provider";
+import { useCartStore } from "@/store/providers/cart-store-provider";
 import Image from "next/image";
 export default function CheckoutCart() {
     const cart = useCartStore((state) => state.cart);
@@ -37,9 +37,7 @@ export default function CheckoutCart() {
                         </li>
                     ))}
                 </ul>
-            ) : (
-                null
-            )}
+            ) : null}
         </>
     );
 }

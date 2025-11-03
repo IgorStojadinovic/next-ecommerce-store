@@ -1,4 +1,4 @@
-import Button from "../button";
+import Button from "../shared/button";
 import { type ProductItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";

@@ -1,6 +1,6 @@
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { FormInput } from "./form-input";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { FormInput } from "../forms/form-input";
 import { UseFormRegister } from "react-hook-form";
 import { CheckoutFormValues } from "@/lib/types";
 import Image from "next/image";
@@ -23,8 +23,9 @@ export default function CheckoutPayment({
                 <Label className="group text-sm font-bold border border-gray-200 rounded-lg p-4 cursor-pointer  has-[:checked]:border-(--color-orange-primary) lg:mt-6">
                     <Input
                         type="radio"
-                        name="paymentMethod"
                         className="hidden"
+                        value="card"
+                        {...register("paymentMethod")}
                     />
                     <span className=" flex items-center justify-center  h-5 w-5 rounded-full border border-gray-400">
                         <span className="group-has-[:checked]:bg-(--color-orange-primary)  h-2.5 w-2.5 rounded-full"></span>
@@ -35,8 +36,9 @@ export default function CheckoutPayment({
                 <Label className="group text-sm font-bold border border-gray-200 rounded-lg p-4 cursor-pointer  has-[:checked]:border-(--color-orange-primary) ">
                     <Input
                         type="radio"
-                        name="paymentMethod"
                         className="hidden"
+                        value="cash"
+                        {...register("paymentMethod")}
                     />
                     <span className=" flex items-center justify-center  h-5 w-5 rounded-full border border-gray-400">
                         <span className="group-has-[:checked]:bg-(--color-orange-primary)  h-2.5 w-2.5 rounded-full"></span>
@@ -46,15 +48,15 @@ export default function CheckoutPayment({
                 </Label>
 
                 <FormInput
-                    label="Card Number"
-                    name="cardNumber"
+                    label="Payment Method"
+                    name="paymentMethod"
                     placeholder="238521993"
                     register={register}
                     className="lg:hidden"
                 />
                 <FormInput
-                    label="Card Pin"
-                    name="cardPin"
+                    label="Payment Method"
+                    name="paymentMethod"
                     placeholder="238521993"
                     register={register}
                     className="lg:hidden"

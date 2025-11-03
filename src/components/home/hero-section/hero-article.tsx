@@ -1,13 +1,12 @@
 "use client";
-import Button from "./button";
 import HeroBackgorund from "./hero-background";
-import { DesktopNavbar } from "./navbar";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
 import Link from "next/link";
+import Button from "../../shared/button";
 
-export default function HeroSection() {
+export default function HeroArticle() {
     const articleRef = useRef<HTMLDivElement>(null);
     useGSAP(
         () => {
@@ -27,12 +26,11 @@ export default function HeroSection() {
                 }
             );
         },
-        { scope: articleRef }
+        { scope: articleRef, dependencies: [] }
     );
 
     return (
-        <section className="overflow-hidden flex flex-col items-center justify-center h-[600px] relative z-10 md:min-h-[724px] xl:min-h-[729px] lg:items-start lg:bg-[#191919] md:px-10 xl:px-[256px]">
-            <DesktopNavbar />
+        <>
             <article
                 ref={articleRef}
                 className="flex flex-col items-center justify-center h-full  w-full text-cente md:w-1/2 text-center lg:items-start lg:text-left lg:w-1/3 "
@@ -53,6 +51,6 @@ export default function HeroSection() {
                 </Link>
             </article>
             <HeroBackgorund />
-        </section>
+        </>
     );
 }

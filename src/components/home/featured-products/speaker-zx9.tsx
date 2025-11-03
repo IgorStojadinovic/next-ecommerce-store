@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "./button";
+import Button from "../../shared/button";
 import Image from "next/image";
 export default function SpeakerZX9() {
     return (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "./button";
+import Button from "../../shared/button";
 export default function SpeakerZX7() {
     return (
         <section className="flex flex-col items-center justify-center rounded-lg text-center text-black relative w-full">
