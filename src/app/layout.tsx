@@ -6,6 +6,7 @@ import { CartStoreProvider } from "@/store/providers/cart-store-provider";
 import NavbarWrapper from "@/components/layout/navbar/navbar-wrapper";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/lib/auth/config";
+import GithubIcon from "@/components/shared/github-icon";
 
 const manrope = Manrope({
     subsets: ["latin"],
@@ -37,6 +38,7 @@ export default async function RootLayout({
                         <Footer />
                     </div>
                 </div>
+                <GithubIcon />
             </body>
         </html>
     );
