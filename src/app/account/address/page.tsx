@@ -68,7 +68,6 @@ export default function AddressPage() {
         },
     });
 
-    console.log("SESSION USER", session?.user);
 
     const onSubmit = async (data: AddressFormValues) => {
         setIsLoading(true);
