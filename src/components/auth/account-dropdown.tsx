@@ -13,11 +13,6 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 export default function AccountDropdown() {
-    const handleLogout = async () => {
-        await signOut({
-            redirect: false,
-        });
-    };
     const [isOpen, setIsOpen] = useState(false);
     return (
         <>
@@ -56,7 +51,7 @@ export default function AccountDropdown() {
                     </DropdownMenuItem>
                     <DropdownMenuItem
                         className="cursor-pointer"
-                        onClick={handleLogout}
+                        onClick={() => signOut()}
                     >
                         Logout
                     </DropdownMenuItem>

@@ -1,4 +1,4 @@
-import { Recomendation } from "./data/recomendations";
+import { Recomendation } from "@/lib/data/recomendations";
 
 export type ProductItem = {
     name: string;
@@ -52,6 +52,8 @@ export type CartItem = {
     quantity: number;
     images: {
         mobile: string;
+        tablet: string;
+        desktop: string;
     };
 };
 

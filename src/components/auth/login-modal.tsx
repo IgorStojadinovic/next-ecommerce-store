@@ -29,7 +29,7 @@ export default function LoginModal() {
                 </Avatar>
             </DialogTrigger>
             <DialogContent className="flex flex-col gap-8 w-[400px] bg-zinc-950 text-white border-zinc-800">
-                <DialogHeader className=" items-start justify-between pt-8 flex-col  ">
+                <DialogHeader className="items-start justify-between pt-8 flex-col text-center">
                     <DialogTitle className="text-sm normal-case">
                         Login to your account
                     </DialogTitle>
@@ -37,7 +37,7 @@ export default function LoginModal() {
                         Enter your email below to login to your account
                     </p>
                 </DialogHeader>
-                <LoginForm setOpen={setOpen} />
+                <LoginForm />
             </DialogContent>
         </Dialog>
     );
