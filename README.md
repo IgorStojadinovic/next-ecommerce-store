@@ -40,4 +40,4 @@ To get a local copy up and running follow these simple steps.
     npm run dev
     ```
 
-Project Link: [https://github.com/your_username/audiophile-next](https://github.com/your_username/audiophile-next)
+Project Link:[https://audiophile-prod.netlify.app/](https://audiophile-prod.netlify.app/)
