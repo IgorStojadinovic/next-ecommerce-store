@@ -4,7 +4,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function CancelOrderButton({ orderId }: { orderId: number }) {
+export default function CancelOrderButton({
+    orderId,
+    onCancelled,
+}: {
+    orderId: number;
+    onCancelled?: () => void;
+}) {
     const router = useRouter();
     const [isCancelling, setIsCancelling] = useState(false);
 
@@ -37,7 +43,11 @@ export default function CancelOrderButton({ orderId }: { orderId: number }) {
             }
 
             toast.success("Order cancelled");
-            router.refresh();
+            if (onCancelled) {
+                onCancelled();
+            } else {
+                router.refresh();
+            }
         } catch (error) {
             toast.error(
                 error instanceof Error
