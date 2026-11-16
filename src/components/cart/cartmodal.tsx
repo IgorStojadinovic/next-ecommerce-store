@@ -53,6 +53,18 @@ export default function CartModal() {
                     className="cursor-pointer "
                 />
             </DialogTrigger>
+            <div className="pointer-events-none absolute size-0 overflow-hidden opacity-0" aria-hidden>
+                {cart.map((item) => (
+                    <Image
+                        key={item.name}
+                        src={item.images.mobile}
+                        alt=""
+                        width={64}
+                        height={64}
+                        unoptimized
+                    />
+                ))}
+            </div>
             <DialogContent className="flex flex-col gap-8">
                 <DialogHeader className="flex-row items-center justify-between pt-8">
                     <DialogTitle>
@@ -74,9 +86,10 @@ export default function CartModal() {
                             >
                                 <Image
                                     src={item.images.mobile}
-                                    alt="logo"
+                                    alt={item.name}
                                     width={64}
                                     height={64}
+                                    unoptimized
                                     className="rounded-lg"
                                 />
                                 <div className="flex-1">
