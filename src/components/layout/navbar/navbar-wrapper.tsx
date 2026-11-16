@@ -1,8 +1,8 @@
-import { Session } from "next-auth";
+import { SessionUser } from "@/lib/auth/token";
 import { MobileNavbar, DesktopNavbar } from "./navbar";
 
 type NavbarWrapperProps = {
-    session: Session | null;
+    session: { user: SessionUser } | null;
     mobileClassName?: string;
     desktopClassName?: string;
 };

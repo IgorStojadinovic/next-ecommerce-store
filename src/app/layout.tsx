@@ -4,8 +4,8 @@ import "./globals.css";
 import Footer from "@/components/layout/footer";
 import { CartStoreProvider } from "@/store/providers/cart-store-provider";
 import NavbarWrapper from "@/components/layout/navbar/navbar-wrapper";
-import { SessionProvider } from "next-auth/react";
-import { auth } from "@/lib/auth/config";
+import { AuthProvider } from "@/components/auth/auth-provider";
+import { getSession } from "@/lib/auth/session";
 import GithubIcon from "@/components/shared/github-icon";
 
 const manrope = Manrope({
@@ -23,18 +23,18 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const session = await auth();
+    const session = await getSession();
     return (
         <html lang="en">
             <body className={`${manrope.variable} antialiased`}>
                 <div id="smooth-wrapper">
                     <div id="smooth-content">
-                        <SessionProvider session={session}>
+                        <AuthProvider initialUser={session?.user ?? null}>
                             <CartStoreProvider>
                                 <NavbarWrapper session={session} />
                                 <main>{children}</main>
                             </CartStoreProvider>
-                        </SessionProvider>
+                        </AuthProvider>
                         <Footer />
                     </div>
                 </div>

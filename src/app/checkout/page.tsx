@@ -11,7 +11,7 @@ import CheckoutPriceSummary from "@/components/checkout/checkout-price-summary";
 import { CheckoutFormValues, OrderResponse } from "@/lib/types";
 import { useCartStore } from "@/store/providers/cart-store-provider";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useAuth } from "@/components/auth/auth-provider";
 import OrderSuccessModal from "@/components/checkout/order-success-modal";
 import { toast } from "sonner";
 
@@ -23,7 +23,7 @@ export default function CheckoutPage() {
             paymentMethod: "card",
         },
     });
-    const { data: session } = useSession();
+    const { user } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [orderData, setOrderData] = useState<OrderResponse["order"] | null>(
@@ -31,17 +31,16 @@ export default function CheckoutPage() {
     );
 
     useEffect(() => {
-        if (session?.user) {
-            setValue("name", session.user.name || "");
-            setValue("email", session.user.email || "");
-            setValue("phone", session.user.phone || "");
-            setValue("address", session.user.address || "");
-            setValue("city", session.user.city || "");
-            setValue("zip", session.user.zip || "");
-            setValue("state", session.user.state || "");
-            /*       setValue("paymentMethod", session.user.paymentMethod || ""); */
+        if (user) {
+            setValue("name", user.name || "");
+            setValue("email", user.email || "");
+            setValue("phone", user.phone || "");
+            setValue("address", user.address || "");
+            setValue("city", user.city || "");
+            setValue("zip", user.zip || "");
+            setValue("state", user.state || "");
         }
-    }, [session, setValue]);
+    }, [user, setValue]);
 
     const onSubmit: SubmitHandler<CheckoutFormValues> = async (formData) => {
         if (cart.length === 0) {
@@ -49,7 +48,7 @@ export default function CheckoutPage() {
             return;
         }
 
-        if (!session?.user) {
+        if (!user) {
             toast.error("Please login to continue");
             return;
         }
@@ -57,7 +56,7 @@ export default function CheckoutPage() {
         setIsLoading(true);
 
         try {
-            const response = await fetch("/api/orders/create", {
+            const response = await fetch("/api/orders", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,7 +69,20 @@ export default function CheckoutPage() {
 
             if (!response.ok) {
                 const errorText = await response.text();
-                throw new Error(errorText || "Failed to create order");
+                let message = errorText;
+                try {
+                    const parsed = JSON.parse(errorText) as {
+                        message?: string | string[];
+                    };
+                    if (Array.isArray(parsed.message)) {
+                        message = parsed.message.join(", ");
+                    } else if (parsed.message) {
+                        message = parsed.message;
+                    }
+                } catch {
+                    message = errorText;
+                }
+                throw new Error(message || "Failed to create order");
             }
 
             const data: OrderResponse = await response.json();

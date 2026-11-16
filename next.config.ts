@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
+const apiUrl = process.env.API_URL ?? "http://localhost:3001";
+
 const nextConfig: NextConfig = {
+    agentRules: false,
+    async rewrites() {
+        return [
+            {
+                source: "/api/:path*",
+                destination: `${apiUrl}/:path*`,
+            },
+        ];
+    },
     images: {
         qualities: [100],
         remotePatterns: [
@@ -16,9 +27,6 @@ const nextConfig: NextConfig = {
     },
     typescript: {
         ignoreBuildErrors: true,
-    },
-    eslint: {
-        ignoreDuringBuilds: true,
     },
     output: "standalone",
 };

@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma, Category } from "../generated/prisma";
+import { PrismaClient, Prisma, Category } from "@prisma/client";
 import bcrypt from "bcrypt";
   
 const prisma = new PrismaClient();

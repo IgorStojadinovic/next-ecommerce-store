@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { signOut } from "next-auth/react";
+import { logout } from "@/lib/auth/logout";
 import Link from "next/link";
 
 export default function AccountDropdown() {
@@ -51,7 +51,7 @@ export default function AccountDropdown() {
                     </DropdownMenuItem>
                     <DropdownMenuItem
                         className="cursor-pointer"
-                        onClick={() => signOut()}
+                        onClick={() => logout()}
                     >
                         Logout
                     </DropdownMenuItem>

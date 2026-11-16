@@ -1,6 +1,7 @@
 "use client";
 import AccountModal from "../../auth/account-dropdown";
 import LoginModal from "../../auth/login-modal";
+import { useAuth } from "../../auth/auth-provider";
 import { useState, useEffect } from "react";
 
 type AuthButtonProps = {
@@ -17,6 +18,7 @@ function AuthButtonSkeleton() {
 }
 
 export default function AuthButton({ isAuthenticated }: AuthButtonProps) {
+    const { user } = useAuth();
     const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {
@@ -27,5 +29,5 @@ export default function AuthButton({ isAuthenticated }: AuthButtonProps) {
         return <AuthButtonSkeleton />;
     }
 
-    return isAuthenticated ? <AccountModal /> : <LoginModal />;
+    return isAuthenticated || user ? <AccountModal /> : <LoginModal />;
 }
