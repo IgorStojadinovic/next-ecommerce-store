@@ -16,5 +16,5 @@ export async function apiAuthHeaders(): Promise<HeadersInit> {
 }
 
 export function apiUrl() {
-    return process.env.API_URL ?? "http://localhost:3001";
+    return (process.env.API_URL ?? "http://localhost:3001").replace(/\/+$/, "");
 }
