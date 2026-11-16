@@ -45,12 +45,6 @@ export default function AccountDropdown() {
                     </DropdownMenuItem>
                     <DropdownMenuItem
                         className="cursor-pointer"
-                        onClick={() => setIsOpen(false)}
-                    >
-                        <Link href="/account/orders">Orders</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                        className="cursor-pointer"
                         onClick={() => logout()}
                     >
                         Logout
