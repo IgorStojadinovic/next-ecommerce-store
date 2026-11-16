@@ -1,9 +1,11 @@
 const OrdersContainer = ({ children }: { children: React.ReactNode }) => {
     return (
-      <section className="flex flex-col gap-8 items-start w-full h-full p-10 pt-46">
-            <h1 className="text-2xl font-bold">Orders</h1>
+        <section className="rounded-lg bg-white p-6 md:p-8">
+            <p className="text-sm font-bold uppercase tracking-[1px] text-(--color-orange-primary)">
+                Orders
+            </p>
             {children}
-       </section>
+        </section>
     );
 };
 

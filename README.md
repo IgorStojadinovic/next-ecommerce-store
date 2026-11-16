@@ -1,43 +1,25 @@
-# Audiophile E-commerce Website
+# Audiophile
 
-This project is a e-commerce platform dedicated to selling high-quality audio equipment. It provides users with a seamless shopping experience, featuring a wide range of products from headphones to speakers.
-## Technologies Used
+Storefront for headphones, speakers, and earphones. The shop is a Next.js app. Accounts, checkout orders, and authentication live in a NestJS API.
 
--   ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
--   ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
--   ![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white) 
--   ![React Hook Form](https://img.shields.io/badge/React_Hook_Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white) 
--   ![Context API](https://img.shields.io/badge/Context_API-61DAFB?style=for-the-badge&logo=react&logoColor=white)  
+Live site: [audiophile-prod.netlify.app](https://audiophile-prod.netlify.app/)
+
+## Stack
+
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white) ![Zustand](https://img.shields.io/badge/Zustand-443E38?style=for-the-badge&logo=zustand&logoColor=white)
+
+- Next.js 16 and React 19 for the storefront
+- NestJS 12 for the API
+- PostgreSQL and Prisma
+- JWT in an httpOnly cookie
+- Google sign-in and email/password accounts
+- Tailwind CSS for components and Zustand for the cart
 
 ## Features
 
--   User-friendly interface
--   Responsive design
--   Fast and efficient state management
--   Secure and reliable
-
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
--   Node.js
--   npm
-
-### Installation
-
-1. Clone the repo
-    ```sh
-    git clone https://github.com/your_username/audiophile-next.git
-    ```
-2. Install NPM packages
-    ```sh
-    npm install
-    ```
-3. Run the development server
-    ```sh
-    npm run dev
-    ```
-
-Project Link:[https://audiophile-prod.netlify.app/](https://audiophile-prod.netlify.app/)
+- Product pages for headphones, speakers, and earphones
+- Cart and checkout
+- Sign in with Google, or create an account with email and password
+- Account page with saved address and order history
+- Four orders per page, with the option to delete an order that is still pending or processing
+- Delete the account, including its orders

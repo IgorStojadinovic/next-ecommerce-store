@@ -1,7 +1,5 @@
 import Container from "@/components/layout/container";
-
 import AccountLinks from "@/components/account/Links";
-import Wrapper from "@/components/layout/wapper";
 
 export default function AccountLayout({
     children,
@@ -9,16 +7,20 @@ export default function AccountLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div>
-            <Container className="flex items-start h-screen">
-                <Wrapper>
-                    <div className="flex flex-col gap-2 mt-10">
-                        <h1>Account</h1>
-                        <p>Manage your account and personal information</p>
+        <div className="bg-(--color-light-gray)">
+            <Container className="flex flex-col gap-8 pt-28 pb-16 lg:flex-row lg:items-start lg:pt-12 lg:pb-24">
+                <aside className="w-full lg:w-72 lg:shrink-0">
+                    <div className="mb-6">
+                        <p className="text-[32px] font-bold uppercase leading-none tracking-[1.5px]">
+                            Account
+                        </p>
+                        <p className="mt-3 text-sm text-black/50">
+                            Manage your account and personal information
+                        </p>
                     </div>
                     <AccountLinks />
-                </Wrapper>
-                {children}
+                </aside>
+                <div className="min-w-0 flex-1">{children}</div>
             </Container>
         </div>
     );

@@ -1,7 +1,8 @@
-import { auth } from "@/lib/auth/config";
+import { apiAuthHeaders, apiUrl, getSession } from "@/lib/auth/session";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import OrdersContainer from "@/components/orders/container";
-import { prisma } from "@/lib/db/prisma";
+import CancelOrderButton from "@/components/orders/cancel-order-button";
 
 type OrderItem = {
     id: number;
@@ -23,75 +24,54 @@ type Order = {
     items: OrderItem[];
 };
 
-async function getOrders(userId: string): Promise<Order[]> {
-    const orders = await prisma.order.findMany({
-        where: { userId },
-        include: {
-            items: {
-                include: {
-                    product: {
-                        select: { name: true },
-                    },
-                },
-            },
-        },
-        orderBy: { createdAt: "desc" },
+type OrdersPageData = {
+    page: number;
+    pageSize: number;
+    total: number;
+    pageCount: number;
+    items: Order[];
+};
+
+async function getOrders(page: number): Promise<OrdersPageData> {
+    const response = await fetch(`${apiUrl()}/orders?page=${page}`, {
+        headers: await apiAuthHeaders(),
+        cache: "no-store",
     });
 
-    return orders.map((order) => ({
-        id: order.id,
-        createdAt: order.createdAt.toISOString(),
-        totalAmount: Number(order.totalAmount),
-        status: order.status,
-        paymentStatus: order.paymentStatus,
-        shippingAddress: order.shippingAddress || "",
-        shippingMethod: order.shippingMethod || "",
-        items: order.items.map((item) => ({
-            id: item.id,
-            quantity: item.quantity,
-            price: Number(item.price),
-            product: {
-                name: item.product.name,
-            },
-        })),
-    }));
+    if (!response.ok) {
+        throw new Error("Failed to load orders");
+    }
+
+    return response.json();
 }
 
-export default async function OrdersPage() {
-    const session = await auth();
+function formatMoney(value: number) {
+    return `$ ${value.toLocaleString()}`;
+}
+
+export default async function OrdersPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ page?: string }>;
+}) {
+    const session = await getSession();
 
     if (!session?.user) {
         redirect("/");
     }
 
-    const orders = await getOrders(session.user.id);
+    const requestedPage = Number((await searchParams).page) || 1;
+    const { items: orders, page, pageCount } = await getOrders(requestedPage);
 
-    const getStatusColor = (status: Order["status"]) => {
-        const colors = {
-            PENDING: "text-yellow-600",
-            PROCESSING: "text-blue-600",
-            SHIPPED: "text-purple-600",
-            DELIVERED: "text-green-600",
-            CANCELLED: "text-red-600",
-        };
-        return colors[status];
-    };
-
-    const getPaymentStatusColor = (status: Order["paymentStatus"]) => {
-        const colors = {
-            PENDING: "text-yellow-600",
-            COMPLETED: "text-green-600",
-            FAILED: "text-red-600",
-            REFUNDED: "text-purple-600",
-        };
-        return colors[status];
-    };
+    if (pageCount > 0 && page !== requestedPage) {
+        redirect(`/account/orders?page=${page}`);
+    }
 
     if (orders.length === 0) {
         return (
             <OrdersContainer>
-                <p className="text-sm text-gray-500">
-                    You don&apos;t have any orders yet
+                <p className="text-sm text-black/50">
+                    You don&apos;t have any orders yet.
                 </p>
             </OrdersContainer>
         );
@@ -99,69 +79,130 @@ export default async function OrdersPage() {
 
     return (
         <OrdersContainer>
-            <div className="flex flex-col gap-6 w-full border border-black/10  rounded-md p-6 overflow-y-scroll">
+            <div>
                 {orders.map((order) => (
-                    <div key={order.id} className="p-6 bg-black/5 rounded-md ">
-                        <div className="flex justify-between items-start mb-4">
+                    <article
+                        key={order.id}
+                        className="border-t border-black/10 py-6 first:border-t-0"
+                    >
+                        <div className="flex items-baseline justify-between gap-4">
                             <div>
-                                <p className="text-sm font-medium">
+                                <p className="text-sm font-bold uppercase tracking-[1px]">
                                     Order #{order.id}
                                 </p>
-                                <p className="text-sm text-gray-500">
-                                    {new Date(
-                                        order.createdAt
-                                    ).toLocaleDateString("en-US")}
-                                </p>
-                                <p
-                                    className={`text-sm font-medium ${getStatusColor(
-                                        order.status
-                                    )}`}
-                                >
-                                    Status: {order.status}
-                                </p>
-                                <p
-                                    className={`text-sm font-medium ${getPaymentStatusColor(
-                                        order.paymentStatus
-                                    )}`}
-                                >
-                                    Payment: {order.paymentStatus}
+                                <p className="pt-1 text-sm text-black/50">
+                                    {new Date(order.createdAt).toLocaleDateString(
+                                        "en-US",
+                                        {
+                                            month: "short",
+                                            day: "numeric",
+                                            year: "numeric",
+                                        }
+                                    )}
                                 </p>
                             </div>
-                            <p className="font-medium ">
-                                TOTAL: $ {order.totalAmount.toLocaleString()}
-                            </p>
+                            <div className="flex flex-col items-end gap-2">
+                                <p className="text-sm font-bold">
+                                    {formatMoney(order.totalAmount)}
+                                </p>
+                                {(order.status === "PENDING" ||
+                                    order.status === "PROCESSING") && (
+                                    <CancelOrderButton orderId={order.id} />
+                                )}
+                            </div>
                         </div>
 
-                        <div className="mt-4 text-sm text-gray-600">
-                            <p>Shipping method: {order.shippingMethod}</p>
-                            <p>Address: {order.shippingAddress}</p>
-                        </div>
-
-                        <div className="mt-4 space-y-3">
-                            <p className="text-sm font-medium">Products:</p>
+                        <ul className="flex flex-col gap-4 pt-6">
                             {order.items.map((item) => (
-                                <div
+                                <li
                                     key={item.id}
-                                    className="flex justify-between items-center text-sm"
+                                    className="flex items-center justify-between gap-4"
                                 >
                                     <div>
-                                        <p>{item.product.name}</p>
-                                        <p className="text-gray-500">
-                                            Quantity: {item.quantity}
+                                        <p className="text-sm font-bold">
+                                            {item.product.name}
+                                        </p>
+                                        <p className="pt-1 text-sm font-bold text-black/50">
+                                            {formatMoney(
+                                                item.price * item.quantity
+                                            )}
                                         </p>
                                     </div>
-                                    <p>
-                                        ${" "}
-                                        {(
-                                            item.price * item.quantity
-                                        ).toLocaleString()}
+                                    <p className="text-sm font-bold text-black/50">
+                                        x{item.quantity}
                                     </p>
-                                </div>
+                                </li>
                             ))}
-                        </div>
-                    </div>
+                        </ul>
+
+                        <dl className="grid grid-cols-2 gap-x-6 gap-y-4 pt-6 md:grid-cols-4">
+                            <div>
+                                <dt className="text-xs font-bold uppercase tracking-[1px] text-black/40">
+                                    Status
+                                </dt>
+                                <dd className="pt-1 text-sm font-bold">
+                                    {order.status}
+                                </dd>
+                            </div>
+                            <div>
+                                <dt className="text-xs font-bold uppercase tracking-[1px] text-black/40">
+                                    Payment
+                                </dt>
+                                <dd className="pt-1 text-sm font-bold">
+                                    {order.paymentStatus}
+                                </dd>
+                            </div>
+                            <div>
+                                <dt className="text-xs font-bold uppercase tracking-[1px] text-black/40">
+                                    Shipping
+                                </dt>
+                                <dd className="pt-1 text-sm font-bold">
+                                    {order.shippingMethod}
+                                </dd>
+                            </div>
+                            <div>
+                                <dt className="text-xs font-bold uppercase tracking-[1px] text-black/40">
+                                    Address
+                                </dt>
+                                <dd className="pt-1 text-sm font-bold">
+                                    {order.shippingAddress}
+                                </dd>
+                            </div>
+                        </dl>
+                    </article>
                 ))}
             </div>
+            {pageCount > 1 && (
+                <nav className="flex items-center justify-between border-t border-black/10 pt-6">
+                    {page > 1 ? (
+                        <Link
+                            href={`/account/orders?page=${page - 1}`}
+                            className="text-sm font-bold uppercase tracking-[1px] text-black/50 hover:text-(--color-orange-primary)"
+                        >
+                            Previous
+                        </Link>
+                    ) : (
+                        <span className="text-sm font-bold uppercase tracking-[1px] text-black/20">
+                            Previous
+                        </span>
+                    )}
+                    <p className="text-sm text-black/50">
+                        {page} / {pageCount}
+                    </p>
+                    {page < pageCount ? (
+                        <Link
+                            href={`/account/orders?page=${page + 1}`}
+                            className="text-sm font-bold uppercase tracking-[1px] text-black/50 hover:text-(--color-orange-primary)"
+                        >
+                            Next
+                        </Link>
+                    ) : (
+                        <span className="text-sm font-bold uppercase tracking-[1px] text-black/20">
+                            Next
+                        </span>
+                    )}
+                </nav>
+            )}
         </OrdersContainer>
     );
 }

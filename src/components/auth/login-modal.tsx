@@ -2,8 +2,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -16,7 +14,7 @@ export default function LoginModal() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger
                 className={
-                    "flex items-center justify-center cursor-pointer group focus-visible:outline-none focus:outline-none"
+                    "flex cursor-pointer items-center justify-center group focus-visible:outline-none focus:outline-none"
                 }
             >
                 <Avatar className="h-[24px] w-[24px]">
@@ -28,16 +26,8 @@ export default function LoginModal() {
                     />
                 </Avatar>
             </DialogTrigger>
-            <DialogContent className="flex flex-col gap-8 w-[400px] bg-zinc-950 text-white border-zinc-800">
-                <DialogHeader className="items-start justify-between pt-8 flex-col text-center">
-                    <DialogTitle className="text-sm normal-case">
-                        Login to your account
-                    </DialogTitle>
-                    <p className="text-sm ">
-                        Enter your email below to login to your account
-                    </p>
-                </DialogHeader>
-                <LoginForm />
+            <DialogContent className="max-h-[calc(100dvh-2rem)] w-[min(100%,400px)] overflow-y-auto border-black/10 bg-white p-6 text-black sm:max-w-[400px] sm:p-8">
+                <LoginForm onSuccess={() => setOpen(false)} />
             </DialogContent>
         </Dialog>
     );
