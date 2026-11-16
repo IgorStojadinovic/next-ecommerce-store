@@ -6,7 +6,7 @@
     "dev": "concurrently -n web,api \"next dev\" \"npm run start:dev --prefix backend\"",
     "dev:web": "next dev",
     "dev:api": "npm run start:dev --prefix backend",
-    "build": "npm run build --prefix backend && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
