@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
-const apiUrl = process.env.API_URL ?? "http://localhost:3001";
+const apiUrl = (process.env.API_URL ?? "http://localhost:3001").replace(
+    /\/+$/,
+    "",
+);
 
 const nextConfig: NextConfig = {
     agentRules: false,
